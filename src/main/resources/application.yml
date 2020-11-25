@@ -1,0 +1,54 @@
+spring:
+  datasource:
+    # inner url
+    # url: jdbc:mysql://rm-j0bt8woy1xl618o5235640.mysql.australia.rds.aliyuncs.com:3306/mee_store?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    # outer url
+    url: jdbc:mysql://rm-j0bt8woy1xl618o52so.mysql.australia.rds.aliyuncs.com:3306/mee_store?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    username: mee_store
+    password: AvRYwTFZpmTEdo/5ACiKnwGk6KgXwQSBHoTfeJTOZyWkr69+GuRj7FqmGNL0TjL1MmdnUlOIuFN+MkF0paYEPw==
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      test-on-borrow: true
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-While-Idle: true
+      test-on-return: false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: config,stat,wall,log4j
+      # DruidStatFilter
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      # DruidStatViewServlet
+      stat-view-servlet:
+        url-pattern: "/druid/*"
+        # white list
+        #allow:
+        # black list
+        #deny:
+        reset-enable: false
+        # username
+        login-username: admin
+        # password
+        login-password: 123456
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 20MB
+  jackson:
+    default-property-inclusion: NON_NULL
+    date-format: yyyy/MM/dd HH:mm:ss
+    #generator:
+      #write-numbers-as-strings: true
+
+server:
+  port: 8080
