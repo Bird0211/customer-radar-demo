@@ -2,9 +2,11 @@ package com.customerradar.user.vo;
 
 import javax.validation.constraints.NotNull;
 
+import com.customerradar.user.JsonLongSerializer;
 import com.customerradar.user.po.User;
 import com.customerradar.user.service.PhoneNumber;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,6 +28,7 @@ public class UserVo {
         }
     }
 
+    @JsonSerialize(using = JsonLongSerializer.class )
     Long id;
 
     @NotNull(message = "name is null")

@@ -1,6 +1,7 @@
 package com.customerradar.user.service;
 
 import com.customerradar.user.exception.CustomerRadarException;
+import com.customerradar.user.vo.PageResult;
 import com.customerradar.user.vo.UserVo;
 
 /**
@@ -17,5 +18,7 @@ public interface IUserService {
     boolean delUser(Long id) throws CustomerRadarException;
 
     UserVo getUserById(Long userId) throws CustomerRadarException;
+
+    PageResult<UserVo> getUsers(long pageIndex, long pageSize) throws CustomerRadarException;
 
 }

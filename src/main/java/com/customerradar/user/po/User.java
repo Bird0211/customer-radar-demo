@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
-import com.customerradar.user.JsonLongSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,7 +22,6 @@ import org.hibernate.annotations.GenericGenerator;
 public class User {
     
     @Id
-    @JsonSerialize(using = JsonLongSerializer.class )
     @GeneratedValue(generator = "snowFlakeId")
     @GenericGenerator(name = "snowFlakeId", strategy = "com.customerradar.user.util.SnowflakeId")
     @Column(name = "id", nullable = false, length = 20)

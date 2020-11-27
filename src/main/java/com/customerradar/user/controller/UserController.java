@@ -1,11 +1,11 @@
 package com.customerradar.user.controller;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 import com.customerradar.user.enums.StatusCode;
 import com.customerradar.user.exception.CustomerRadarException;
 import com.customerradar.user.service.IUserService;
+import com.customerradar.user.vo.PageResult;
 import com.customerradar.user.vo.Result;
 import com.customerradar.user.vo.UserVo;
 
@@ -81,6 +81,24 @@ public class UserController extends BaseController {
         } catch (Exception ex) {
             result.setStatusCode(StatusCode.FAIL.getCode());
             logger.error("Get User By Phone  = {}", phone, ex);
+        }
+        return result;
+    }
+
+    @GetMapping(value = "/all/{pageIndex}/{pageSize}")
+    public Result<PageResult<UserVo>> getUsers(@PathVariable("pageIndex") long pageIndex, @PathVariable("pageSize") long pageSize) {
+        Result<PageResult<UserVo>> result = new Result<PageResult<UserVo>>();
+        try {
+            PageResult<UserVo> pageResult = userService.getUsers(pageIndex, pageSize);
+            result.setData(pageResult);
+            result.setStatusCodeDes(StatusCode.SUCCESS);
+
+        } catch (CustomerRadarException ex) {
+            result.setStatusCodeDes(ex.getStatusCode());
+            logger.error("Get Users", ex);
+        } catch (Exception ex) {
+            result.setStatusCodeDes(StatusCode.FAIL);
+            logger.error("Get Users", ex);
         }
         return result;
     }
